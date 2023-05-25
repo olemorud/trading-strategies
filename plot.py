@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 
-import util
-import strategies
-
-import matplotlib.pyplot as plt
 import os
 import pickle
+
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 import yfinance as yf
 
+import strategies
+import util
+
 # S&P 500 for the past 20 years, from Yahoo Finance
+# attempt to save and load from file
 stock_index = "^GSPC"
 start = "2003-01-01"
 end = "2023-01-01"
@@ -26,41 +29,23 @@ else:
 
 close_values = data['Close']
 
-# Plotting the results
 plt.figure(figsize=(10, 5))
 
-plt.plot(
-    strategies.buy_hold(close_values),
-    label='Buy and Hold'
-)
+strategies.buy_hold(close_values) \
+    .plot( label='Buy and Hold' ) \
+    .yaxis.set_major_formatter( mtick.PercentFormatter(1.0) )
 
-plt.plot(
-    strategies.monkey_rolling_dice(
-        close_values,
-        buy_likelyhood=3,
-        sell_likelyhood=1,
-        snooze_likelyhood=10
-    ),
-    label='Random Buy/Sell/Sleep 3:1:10'
-)
+strategies.dice_roll(close_values, buy_odds=3, sell_odds=1, snooze_odds=10) \
+    .plot( label='Random Buy/Sell/Sleep 3:1:10') \
+    .yaxis.set_major_formatter( mtick.PercentFormatter(1.0) )
 
-plt.plot(
-    strategies.moving_average_crossover(
-        close_values,
-        slow_avg_days=200,
-        fast_avg_days=50
-    ),
-    label='Moving Average Crossover, (200 day avg vs 50 day avg)'
-)
+strategies.moving_avg_crossover(close_values, slow_avg_days=200, fast_avg_days=50) \
+    .plot( label='Moving Average Crossover, (200 day avg vs 50 day avg)' ) \
+    .yaxis.set_major_formatter( mtick.PercentFormatter(1.0) )
 
-plt.plot(
-    strategies.moving_average_crossover(
-        close_values,
-        slow_avg_days=40,
-        fast_avg_days=10
-    ),
-    label='Moving Average Crossover, (50 day avg vs 20 day avg)'
-)
+strategies.moving_avg_crossover(close_values, slow_avg_days=40, fast_avg_days=10) \
+    .plot( label='Moving Average Crossover, (40 day avg vs 10 day avg)' ) \
+    .yaxis.set_major_formatter( mtick.PercentFormatter(1.0) )
 
 plt.legend()
 

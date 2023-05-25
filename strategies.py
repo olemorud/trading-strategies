@@ -1,8 +1,8 @@
 
-from typing import Sequence
-import pandas as pd
 import random
+from typing import Sequence
 
+import pandas as pd
 
 BADVAL = -999999999
 
@@ -16,14 +16,14 @@ def buy_hold(prices: pd.Series) -> pd.Series:
     return prices.map(lambda x: x / prices[0])
 
 
-# monkey rolling dice will buy/hold and sell randomly, and always has enough cash
+# dice roll will buy/hold and sell randomly, and always has enough cash
 # to buy stocks. (i.e. cash can be negative).
 # Will either hold the entire market or nothing, no inbetween
-def monkey_rolling_dice(
+def dice_roll(
         prices: pd.Series,
-        buy_likelyhood=1,
-        sell_likelyhood=1,
-        snooze_likelyhood=0
+        buy_odds=1,
+        sell_odds=1,
+        snooze_odds=0
 ) -> pd.Series:
     if type(prices) == "float":
         prices = prices.map(microcents)
@@ -38,16 +38,16 @@ def monkey_rolling_dice(
     cash = prices[0]
     stock_value = 0
     holding = False
-    rand_max = buy_likelyhood + sell_likelyhood + snooze_likelyhood
+    rand_max = buy_odds + sell_odds + snooze_odds
 
     for i, market_price in prices.items():
         dart_throw = random.randint(1, rand_max)
 
-        if (dart_throw <= buy_likelyhood) and not holding:
+        if (dart_throw <= buy_odds) and not holding:
             cash -= market_price
             holding = True
 
-        elif (dart_throw <= buy_likelyhood + sell_likelyhood) and holding:
+        elif (dart_throw <= buy_odds + sell_odds) and holding:
             cash += market_price
             holding = False
 
@@ -61,7 +61,7 @@ def monkey_rolling_dice(
 # https://www.nasdaq.com/glossary/g/golden-cross
 # https://www.nasdaq.com/glossary/d/death-cross
 # Assumes you blindly follow moving average crossover
-def moving_average_crossover(prices: pd.Series, slow_avg_days=200, fast_avg_days=50) -> pd.Series:
+def moving_avg_crossover(prices: pd.Series, slow_avg_days=200, fast_avg_days=50) -> pd.Series:
     def last_n_elem_avg(arr: Sequence[int], n: int, index: int) -> float:
         if index < n:
             return sum(arr[ : index+1]) // (index+1)

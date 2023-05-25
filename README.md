@@ -7,8 +7,9 @@ on historical data.
 ![figure](plot.svg)
 
 Currently implemented strategies:
-- buy and hold
-- buy and sell randomly
+- Buy and hold
+- Dice roll buy/sell
+- Moving average crossover
 
 ## Assumptions
 
@@ -18,8 +19,7 @@ managed funds. Therefore some assumptions and
 simplifications are made:
 
  - Assumes no trading fees on transactions.
- - Assumes that you're buying and selling the entire index.
-(subject to change)
+ - Assumes that you're buying and selling the entire index. (subject to change)
 
 ## Run
 
