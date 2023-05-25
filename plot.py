@@ -63,4 +63,7 @@ plt.plot(
 )
 
 plt.legend()
+
+plt.savefig("plot.svg")
+
 plt.show()

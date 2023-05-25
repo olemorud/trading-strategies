@@ -4,6 +4,8 @@
 Plots how different trading strategies would have performed
 on historical data.
 
+![figure](plot.svg)
+
 Currently implemented strategies:
 - buy and hold
 - buy and sell randomly
