@@ -6,11 +6,6 @@ on historical data.
 
 ![figure](plot.svg)
 
-Currently implemented strategies:
-- Buy and hold
-- Dice roll buy/sell
-- Moving average crossover
-
 ## Assumptions
 
 The main purpose of these plots is to see if stupidly
@@ -20,6 +15,31 @@ simplifications are made:
 
  - Assumes no trading fees on transactions.
  - Assumes that you're buying and selling the entire index. (subject to change)
+
+## Currently implemented strategies:
+
+### Buy and hold
+
+Buy at start, never sell
+
+### Dice roll buy/sell
+
+Buy everything, sell everything or do nothing at random.
+
+Performs worse than the buy and hold strategy, because the dice roll approach
+ends up having fewer days invested in the stock market
+
+### Moving average crossover
+
+Buy when a short term average (e.g. 50 days) surpasses a long term average (e.g
+200 days), buy. Conversely, sell when the long term average surpasses the short
+term average.
+
+Although it mitigates the losses of some market crashes, it also takes longer
+to capitalize on bull runs, resulting in a worse performance. Briefly outperformed
+buy and hold in the years after the
+[2007-2008 financial crisis](https://en.wikipedia.org/wiki/2007%E2%80%932008_financial_crisis)
+
 
 ## Run
 
