@@ -1,10 +1,10 @@
-
 # Trading strategies plot
 
 Plots how different trading strategies would have performed
 on historical data.
 
 ![figure](plot.svg)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Folemorud%2Ftrading-strategies.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Folemorud%2Ftrading-strategies?ref=badge_shield)
 
 ## Assumptions
 
@@ -88,3 +88,7 @@ python plot.py
 : deactivate venv
 deactivate
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Folemorud%2Ftrading-strategies.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Folemorud%2Ftrading-strategies?ref=badge_large)
